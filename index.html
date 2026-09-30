@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Grade Calculator</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #eef2ff;
+  text-align: center;
+  padding: 30px;
+}
+.container {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 350px;
+  margin: auto;
+}
+input, button {
+  padding: 12px;
+  margin: 8px;
+  width: 85%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+button {
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+}
+#result {
+  font-weight: bold;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Student Grade Calculator</h2>
+  <p>Enter marks for 3 subjects</p>
+
+  <input type="number" id="m1" placeholder="Subject 1 Marks">
+  <input type="number" id="m2" placeholder="Subject 2 Marks">
+  <input type="number" id="m3" placeholder="Subject 3 Marks">
+
+  <button onclick="calculate()">Calculate Grade</button>
+  <div id="result"></div>
+</div>
+
+<script>
+function calculate() {
+  let a = Number(document.getElementById("m1").value);
+  let b = Number(document.getElementById("m2").value);
+  let c = Number(document.getElementById("m3").value);
+
+  if ([a,b,c].some(x => x < 0 || x > 100) ||
+      ["m1","m2","m3"].some(id =>
+      document.getElementById(id).value === "")) {
+    document.getElementById("result").innerHTML =
+      "Enter valid marks between 0 and 100.";
+    return;
+  }
+
+  let percentage = (a+b+c)/3;
+  let grade = percentage >= 90 ? "A+" :
+              percentage >= 75 ? "A" :
+              percentage >= 60 ? "B" :
+              percentage >= 40 ? "C" : "Fail";
+
+  document.getElementById("result").innerHTML =
+    "Percentage: " + percentage.toFixed(2) +
+    "%<br>Grade: " + grade;
+}
+</script>
+</body>
+</html>
